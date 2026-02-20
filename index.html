@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PSHT – Setia Hati Terate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel+Decorative:wght@700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --black:   #000000;
+      --deep:    #0a0a0a;
+      --red:     #c0392b;
+      --gold:    #d4a017;
+      --white:   #f0ece4;
+      --dim:     #888880;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 100%; height: 100%;
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Rajdhani', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── grain overlay ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      background-size: 160px;
+      pointer-events: none;
+      opacity: .5;
+    }
+
+    /* ── ambient glow ── */
+    body::after {
+      content: '';
+      position: fixed; inset: 0; z-index: 0;
+      background: radial-gradient(ellipse 70% 55% at 50% 60%, rgba(192,57,43,.13) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: relative; z-index: 2;
+      display: flex; align-items: center; justify-content: center;
+      padding: 2.8rem 1rem .6rem;
+      flex-direction: column; gap: .2rem;
+    }
+
+    .tag-line {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .78rem; letter-spacing: .45em; text-transform: uppercase;
+      color: var(--gold); opacity: .8;
+    }
+
+    .title-main {
+      font-family: 'Cinzel Decorative', cursive;
+      font-size: clamp(2rem, 8vw, 5.2rem);
+      font-weight: 900; letter-spacing: .05em; line-height: 1;
+      background: linear-gradient(135deg, #fff 0%, var(--gold) 45%, #fff 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+      background-size: 200% 200%;
+    }
+
+    @keyframes shimmer {
+      0%,100% { background-position: 0% 50%; }
+      50%      { background-position: 100% 50%; }
+    }
+
+    .title-sub {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1rem, 4vw, 2.2rem);
+      letter-spacing: .35em; color: var(--dim);
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      position: relative; z-index: 2;
+      display: flex; align-items: center; gap: 1rem;
+      max-width: 600px; width: 90%; margin: 1.6rem auto;
+    }
+    .divider span { height: 1px; flex: 1; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+    .divider i { color: var(--gold); font-size: 1.1rem; font-style: normal; }
+
+    /* ── CARD ── */
+    .card {
+      position: relative; z-index: 2;
+      max-width: 480px; width: 92%;
+      margin: 0 auto;
+      border: 1px solid rgba(212,160,23,.25);
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow:
+        0 0 0 1px rgba(212,160,23,.08),
+        0 8px 40px rgba(0,0,0,.9),
+        0 0 80px rgba(192,57,43,.12);
+      animation: fadeUp .9s cubic-bezier(.22,1,.36,1) both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(36px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .card img {
+      width: 100%; display: block;
+      filter: contrast(1.05) saturate(.9);
+      transition: filter .5s, transform .6s cubic-bezier(.22,1,.36,1);
+    }
+    .card:hover img {
+      filter: contrast(1.1) saturate(1.05);
+      transform: scale(1.03);
+    }
+
+
+    /* corner ornaments */
+    .card::before, .card::after {
+      content: '';
+      position: absolute; z-index: 3;
+      width: 20px; height: 20px;
+      border-color: var(--gold);
+      border-style: solid;
+      opacity: .5;
+    }
+    .card::before { top: 8px; left: 8px;  border-width: 1px 0 0 1px; }
+    .card::after  { bottom: 8px; right: 8px; border-width: 0 1px 1px 0; }
+
+    /* ── FOOTER MOTTO ── */
+    .motto {
+      position: relative; z-index: 2;
+      text-align: center;
+      padding: 2.2rem 1rem 2.8rem;
+      display: flex; flex-direction: column; gap: .5rem; align-items: center;
+    }
+
+    .motto-text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.1rem, 3vw, 1.6rem);
+      letter-spacing: .3em; color: var(--dim);
+    }
+
+    .motto-line {
+      display: flex; align-items: center; gap: .8rem;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .72rem; letter-spacing: .4em; text-transform: uppercase;
+      color: rgba(212,160,23,.5);
+    }
+    .motto-line::before, .motto-line::after {
+      content: ''; width: 40px; height: 1px;
+      background: rgba(212,160,23,.3);
+    }
+
+    /* ── pulse ring on load ── */
+    @keyframes ring {
+      0%   { box-shadow: 0 0 0 0 rgba(192,57,43,.4); }
+      70%  { box-shadow: 0 0 0 18px rgba(192,57,43,0); }
+      100% { box-shadow: 0 0 0 0 rgba(192,57,43,0); }
+    }
+    .card { animation: fadeUp .9s cubic-bezier(.22,1,.36,1) both, ring 2s ease 1s 3; }
+    /* ── MOBILE ── */
+    @media (max-width: 480px) {
+      header { padding: 2rem 1rem .4rem; }
+      .card  { width: 96%; }
+      .motto { padding: 1.6rem 1rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <span class="tag-line">Persaudaraan Setia Hati</span>
+    <h1 class="title-main">PSHT</h1>
+    <span class="title-sub">Terate</span>
+  </header>
+
+  <div class="divider">
+    <span></span><i>✦</i><span></span>
+  </div>
+
+  <div class="card">
+    <img src="psht.webp" alt="Kucing PSHT – Sharelock tak parani" />
+
+  </div>
+
+  <footer class="motto">
+    <span class="motto-text">Setia &nbsp;·&nbsp; Hati &nbsp;·&nbsp; Terate</span>
+    <span class="motto-line">Persaudaraan Sejati</span>
+  </footer>
+
+</body>
+</html>
